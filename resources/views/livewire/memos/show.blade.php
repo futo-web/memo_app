@@ -6,19 +6,21 @@ use App\Models\Memo;
 state(['memo' => fn(Memo $memo) => $memo]);
 
 // 編集ページにリダイレクト
-$edit = function (){
-// 編集ページにリダイレクト
+$edit = function () {
+    // 編集ページにリダイレクト
     return redirect()->route('memos.edit', $this->memo);
 };
-$destroy = function(){
+$destroy = function () {
     $this->memo->delete();
     return redirect()->route('memos.index');
 };
+
 ?>
 
 <div>
     <h1>{{ $memo->title }}</h1>
     <p>{!! nl2br(e($memo->body)) !!}</p>
+    <p><strong>優先度:</strong> {{ $memo->priority_text }}</p>
     <a href="/memos">戻る</a>
 
     <button wire:click="edit">編集する</button>
